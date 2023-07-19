@@ -1,10 +1,16 @@
 const {Router} = require('express');
+const {check} = require('express-validator');
+const {validateDocuments} = require('../middlewares/validate.documents.js');
 const {getEquipos,postEquipos,deleteEquipos,putEquipos,patchEquipos, getOneEquipo} = require('../controllers/equipo.controllers.js');
 const router = Router();
 
 router.get("/equipo", getEquipos);
 
-router.post("/equipo/add", postEquipos);
+router.post("/equipo/add",[
+    check('nombre', 'El nombre no es valido').not().isEmpty(),
+    check('pais', 'El pais no es valido').not().isEmpty(),
+    check('can_ciclistas', 'No es valida esa cantidad de ciclistas').not().isEmpty(), validateDocuments
+], postEquipos);
 
 router.delete("/equipo/del/:id", deleteEquipos);
 

@@ -1,4 +1,5 @@
 const Premio = require('../models/models_mongo/premio.js');
+const bcryptjs = require('bcryptjs');
 
 
 const getPremios = async (req, res)=>{
@@ -10,17 +11,25 @@ const getPremios = async (req, res)=>{
 }
 
 const postPremios = async (req, res)=>{
+    const {nombre, categoria, ganador} = req.body;
     
-    const premio = new Premio(req.body);
+    const premio = new Premio({nombre, categoria, ganador});
+    const existsNombre = await Premio.findOne({nombre});
 
-    try {
-        const nuevoPremio = await premio.save();
 
-        res.json(nuevoPremio);
-    } catch (error) {
-        console.log(`${error.message}`);
+    if (existsNombre) {
+        return res.status(400).json({
+            msg: "Person already registered"
+        });
     }
 
+    const salt = bcryptjs.genSaltSync();
+    premio.ganador = bcryptjs.hashSync(ganador, salt);
+   await premio.save();
+   res.json({
+    "message": "post api",
+    premio
+   })
 }
 
 const deletePremios = async (req, res)=>{

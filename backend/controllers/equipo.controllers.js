@@ -1,4 +1,5 @@
 const Equipo = require('../models/models_mongo/equipo.js');
+const bcryptjs = require('bcryptjs');
 
 
 const getEquipos = async (req, res)=>{
@@ -10,16 +11,21 @@ const getEquipos = async (req, res)=>{
 }
 
 const postEquipos = async (req, res)=>{
-    
-    const equipo = new Equipo(req.body);
-
-    try {
-        const nuevoEquipo = await equipo.save();
-
-        res.json(nuevoEquipo);
-    } catch (error) {
-        console.log(`${error.message}`);
+    const {nombre, pais, can_ciclistas} = req.body;
+    const equipo = new Equipo({nombre, pais, can_ciclistas});
+    const existsNombre = await Equipo.findOne({nombre});
+    if (existsNombre) {
+        return res.status(400).json({
+            msg: "Person already registered"
+        });
     }
+
+    
+   await equipo.save();
+   res.json({
+    "message": "post api",
+    equipo
+   })
 
 }
 

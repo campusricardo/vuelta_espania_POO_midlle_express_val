@@ -4,19 +4,22 @@ const premioSchema = mongoose.Schema({
 
     nombre: {
         type: String,
-        required: true,
-        trim: true
+        required: [true, 'Name is required'],
+        unique: true
     },
 
     categoria: {
         type: String,
-        required: true,
-        trim: true
+        required: [true, 'Category is required']
     },
     ganador: {
         type: String,
-        required: true,
-        trim: true
+        required: [true, 'The winner is required']
+
+    },
+    googleSignIn: {
+        type: Boolean,
+        default: false
     }
 },
 {

@@ -9,16 +9,22 @@ const getEtapas = async (req, res)=>{
 }
 
 const postEtapas = async (req, res)=>{
+    const {nombre, duracionM, longitudK, tmrM} = req.body;
 
-    const etapa = new Etapa(req.body);
+    const etapa = new Etapa({nombre, duracionM, longitudK, tmrM});
+    const existsNombre = await Etapa.findOne({nombre});
 
-    try {
-        const nuevoEtapa = await etapa.save();
-
-        res.json(nuevoEtapa);
-    } catch (error) {
-        console.log(`${error.message}`);
+    if (existsNombre) {
+        return res.status(400).json({
+            msg: "Person already registered"
+        });
     }
+
+   await etapa.save();
+   res.json({
+    "message": "post api",
+    etapa
+   })
 }
 
 const deleteEtapas = async (req, res)=>{
