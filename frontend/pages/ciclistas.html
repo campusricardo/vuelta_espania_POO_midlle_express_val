@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href=".././css/style.css">
+    <title>Vuelta a España </title>
+</head>
+<body>
+    <header>
+        <nav class="ul-container">
+
+            
+
+            <ul class="nav-bar">
+
+                <li><a href="../index.html"  rel="noopener noreferrer"><img src=".././img/lavuelta.png"  width="50px" height="50px" alt=""></a></li>
+                <li> <a href="./ciclistas.html"  rel="noopener noreferrer"> Ciclistas </a></li>
+                <li> <a href="./equipos.html"  rel="noopener noreferrer"> Equipos </a> </li>
+                <li> <a href="./etapas.html"  rel="noopener noreferrer"> Etapas </a> </li>
+                <li> <a href="./premios.html"  rel="noopener noreferrer"> Premios </a></li>
+
+            </ul>
+        </nav>
+    </header>
+    <main class="main-container">
+        <div class="div-container">
+        <article class="article-vuelta">
+            <button class="button-crear" id="crearCiclista"> Crear Ciclista </button>
+            <section class="section-vuelta">
+
+            </section>
+        </article>
+    </div>
+    </main>
+
+    <footer>
+
+    </footer>
+
+    <dialog id="modal"> 
+        <button id="cerrar"> X </button>
+        <input type="text" placeholder="nombre" id="nombreX">
+        <input type="number" placeholder="edad" id="edadX">
+        <input type="number" placeholder="peso" id="pesoX">
+        <input type="text" placeholder="equipo" id="equipoX">
+        <button id="enviar"> Enviar</button>
+    </dialog>
+
+    <script src="../js/apiRest/apiCiclistas.js"></script>
+    
+</body>
+</html>
